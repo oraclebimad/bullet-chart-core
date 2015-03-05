@@ -465,7 +465,7 @@
     if (!this.options.renderLegends)
       return this;
 
-    var padding = this.options.labelPosition === 'top' ? this.options.chart.margin.top : (this.options.label.width + this.options.margin.left);
+    var padding = this.options.labelPosition === 'top' ? this.options.chart.margin.top : 0;
     var colors =  this.colors;
     var lineWidth = 6;
     var lineHeight = 18;
@@ -475,22 +475,16 @@
     this.legends.attr({
       'class': 'bullet-legends'
     }).style({
-      'width': this.options.chart.width + 'px',
-      'padding-left': padding + 'px',
+      'width': this.options.width + 'px',
       'padding-top': this.options.legend.paddingTop + 'px',
       'padding-bottom': this.options.legend.paddingBottom + 'px'
     });
 
 
-    var current = this.legends.append('div').attr('class', 'current');
-    var target = this.legends.append('div').attr('class', 'target');
+    var current = this.legends.append('div').attr('class', 'current label');
+    var target = this.legends.append('div').attr('class', 'target label');
 
-    current.append('div')
-           .attr('class', 'label')
-           .style({
-              width: (labelWidth - lineHeight) + 'px'
-            })
-            .append('div').attr('class', 'croptext')
+    current.append('div').attr('class', 'croptext')
             .html('<div class="legend"></div> ' + Utils.capitalize(this.options.currentLabel));
 
    current.select('.legend').style({
@@ -500,12 +494,7 @@
       'margin-bottom': '2px'
     });
 
-    target.append('div')
-           .attr('class', 'label')
-           .style({
-              width: (labelWidth - lineWidth) + 'px'
-            })
-            .append('div').attr('class', 'croptext')
+    target.append('div').attr('class', 'croptext')
             .html('<div class="legend"></div> ' + Utils.capitalize(this.options.targetLabel));
     target.select('.legend').style({
       'background-color': colors('target'),
@@ -573,6 +562,8 @@
 
     foreign.append('xhtml:div').attr({
       'class': 'label ' + data.key
+    }).style({
+      'font-size': this.options.labelFontSize + 'px'
     }).append('xhtml:span').attr('class', 'croptext');
   };
 
