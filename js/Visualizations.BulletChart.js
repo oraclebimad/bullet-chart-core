@@ -38,6 +38,10 @@
     var filter = container.parentNode.querySelector('.filterinfo');
     if (filter)
       filter.style.display = 'none';
+    if (!this.options.baseLineFormat)
+      this.options.baseLineFormat = this.options.numberFormat;
+    if (!this.options.currentFormat)
+      this.options.currentFormat = this.options.numberFormat;
   };
 
   BulletChart.DEFAULTS = {
@@ -576,8 +580,8 @@
 
   BulletChart.prototype.showPopup = function (data, position) {
     this.popup.popup('close');
-    this.popup.find('.target.value').html(this.options.numberFormat(data.baseline));
-    this.popup.find('.current.value').html(this.options.numberFormat(data.current));
+    this.popup.find('.target.value').html(this.options.baseLineFormat(data.baseline));
+    this.popup.find('.current.value').html(this.options.currentFormat(data.current));
     this.popup.find('.percentage.value').html(parseInt((data.current * 100) / data.baseline, 10) + '%');
     this.popup.popup('open', position);
     return this;
