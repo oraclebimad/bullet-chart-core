@@ -619,8 +619,8 @@
     this.hidePopup();
     if (!hasPopup) {
       this.showPopup(data, {
-        left: event.pageX,
-        top: event.pageY
+        left: (event.offsetX + 5) + 'px',
+        top: (event.offsetY - 10) + 'px'
       });
     }
   };
