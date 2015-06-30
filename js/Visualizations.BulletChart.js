@@ -528,7 +528,7 @@
   };
 
   BulletChart.prototype.renderPopup = function () {
-    this.popup = jQuery(this.container.select('div.chart-wrapper').append('div').node());
+    this.popup = $(this.container.select('div.chart-wrapper').append('div').node());
     this.popup.attr({
       'class': 'ui-content popup-detail',
       'data-arrow': 'b,l',
