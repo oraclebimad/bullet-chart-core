@@ -190,7 +190,7 @@
       var target = $(event.target || event.srcElement);
       if (!target.is('g.bullet-chart') && !target.parents('g.bullet-chart').length && !target.is('.ui-popup-container') && !target.parents('.ui-popup-container').length) {
         self.popup.close();
-        svg.selectAll('.bullet-chart').classed('has-popup', false);
+        self.svg.selectAll('.bullet-chart').classed('has-popup', false);
       }
     });
 
