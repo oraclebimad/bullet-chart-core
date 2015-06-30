@@ -188,8 +188,10 @@
 
     document.body.addEventListener('click', function (event) {
       var target = $(event.target || event.srcElement);
-      if (!target.is('g.bullet-chart') && !target.parents('g.bullet-chart').length && !target.is('.ui-popup-container') && !target.parents('.ui-popup-container').length)
+      if (!target.is('g.bullet-chart') && !target.parents('g.bullet-chart').length && !target.is('.ui-popup-container') && !target.parents('.ui-popup-container').length) {
         self.popup.close();
+        svg.selectAll('.bullet-chart').classed('has-popup', false);
+      }
     });
 
     return this;
