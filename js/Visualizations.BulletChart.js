@@ -537,7 +537,8 @@
     var popupWidth;
     if (!popup.length) {
       popup = document.createElement('div');
-      this.container.node().appendChild(popup);
+      document.body.appendChild(popup);
+      //this.container.node().appendChild(popup);
       popup = $(popup).attr('class', 'popup');
 
       popup.attr({
@@ -621,8 +622,8 @@
     this.hidePopup();
     if (!hasPopup) {
       this.showPopup(data, {
-        left: (event.offsetX + 5) + 'px',
-        top: (event.offsetY - 10) + 'px'
+        left: (event.pageX + 5) + 'px',
+        top: (event.pageY - 10) + 'px'
       });
     }
   };
