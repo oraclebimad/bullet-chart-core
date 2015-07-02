@@ -55,20 +55,18 @@
 
   .bullet-legends {
     overflow: hidden;
+
+    vertical-align: middle;
+    text-align: center;
+    word-spacing: 1px;
+    overflow-x: auto;
+    overflow-y: hidden;
+
     .current, .target {
-      width: 48%;
-      display: block;
+      display: inline-block;
       height: 100%;
-      float:left;
       text-align: center;
-    }
-
-    .current {
-      margin-right: 2%;
-    }
-
-    .target {
-      margin-left: 2%;
+      vertical-align: middle;
     }
 
     .legend, .label {
@@ -79,14 +77,30 @@
       vertical-align: middle;
       opacity: 0.7;
       margin-bottom: 1px;
+      margin: 0 5px 1px 5px;
+    }
+
+    .text-wrapper {
+      max-width: 300%;
+      width: auto;
+      white-space: nowrap;
     }
 
     .label {
       color: #A6A9A8;
       text-shadow: none;
-      text-transform: capitalize;
       font-weight: 300;
       font-size: 12px;
+
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-transform: capitalize;
+      line-height: 17px;
+      vertical-align: middle;
+      word-spacing: 1px
+      /*
       &:before {
         content: '';
         display: inline-block;
@@ -97,6 +111,7 @@
         display: inline-block;
         vertical-align: middle;
       }
+      */
     }
 
   }
