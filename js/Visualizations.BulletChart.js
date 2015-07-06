@@ -42,6 +42,12 @@
       this.options.baseLineFormat = this.options.numberFormat;
     if (!this.options.currentFormat)
       this.options.currentFormat = this.options.numberFormat;
+
+    //dummy methods for popup
+    this.popup = {
+      close: function () {},
+      open: function () {}
+    };
   };
 
   BulletChart.DEFAULTS = {
