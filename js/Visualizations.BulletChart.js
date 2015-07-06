@@ -25,6 +25,11 @@
     opts = Utils.isObject(opts) ? opts : {};
     this.options = Utils.extend({}, BulletChart.DEFAULTS, opts);
     this.animations = false;
+    //dummy methods for popup
+    this.popup = {
+      close: function () {},
+      open: function () {}
+    };
     this.init();
     this.events = {
       'filter': [],
@@ -43,11 +48,6 @@
     if (!this.options.currentFormat)
       this.options.currentFormat = this.options.numberFormat;
 
-    //dummy methods for popup
-    this.popup = {
-      close: function () {},
-      open: function () {}
-    };
   };
 
   BulletChart.DEFAULTS = {
