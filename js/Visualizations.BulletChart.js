@@ -187,11 +187,14 @@
     });
 
     document.body.addEventListener('click', function (event) {
+      if (Utils.isDesigner())
+        return this;
       var target = $(event.target || event.srcElement);
       if (!target.is('g.bullet-chart') && !target.parents('g.bullet-chart').length && !target.is('.ui-popup-container') && !target.parents('.ui-popup-container').length) {
         self.popup.close();
         self.svg.selectAll('.bullet-chart').classed('has-popup', false);
       }
+      return this;
     });
 
     return this;
