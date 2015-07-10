@@ -109,7 +109,11 @@
     } else {
       opts.label.width = opts.width;
       opts.chart.width = opts.width * 0.95;
+      opts.margin.left = 20;
     }
+
+    if (!opts.renderLegends)
+      opts.chart.margin.top = 10;
 
     opts.chart.inner = {
       height: opts.chart.height  * INNER_HEIGHT
@@ -340,7 +344,7 @@
 
     if (this.data.length) {
       this.group.attr({
-        'transform': 'translate(' + this.options.margin.left + ', 0)'
+        'transform': 'translate(' + this.options.margin.left + ',' + this.options.chart.margin.top + ')'
       });
     }
 
