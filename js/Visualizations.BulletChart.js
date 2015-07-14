@@ -1,7 +1,7 @@
 (function (main) {
   /* jshint unused:true, jquery:true, curly:false, browser:true */
   /* global d3 */
-  /* global Utils */
+  /* global bimad */
   'use strict';
 
   var LABEL_WIDTH = 0.39;
@@ -22,8 +22,8 @@
 
   var BulletChart = function (container, data, opts) {
     this.container = d3.select(container);
-    opts = Utils.isObject(opts) ? opts : {};
-    this.options = Utils.extend({}, BulletChart.DEFAULTS, opts);
+    opts = bimad.utils.isObject(opts) ? opts : {};
+    this.options = bimad.utils.extend({}, BulletChart.DEFAULTS, opts);
     this.animations = false;
     //dummy methods for popup
     this.popup = {
@@ -197,7 +197,7 @@
     });
 
     document.body.addEventListener('click', function (event) {
-      if (Utils.isDesigner())
+      if (bimad.utils.isDesigner())
         return this;
       var target = $(event.target || event.srcElement);
       if (!target.is('g.bullet-chart') && !target.parents('g.bullet-chart').length && !target.is('.ui-popup-container') && !target.parents('.ui-popup-container').length) {
@@ -222,7 +222,7 @@
   };
 
   BulletChart.prototype.setData = function (data) {
-    if (Utils.isObject(data))
+    if (bimad.utils.isObject(data))
       data = [data];
 
     BUFFER = data.length > 1 ? BUFFER : 1;
@@ -232,8 +232,8 @@
     var opts = this.options;
     var thresholds = d3.entries(opts.thresholds);
     var thresholdsVal = d3.values(opts.thresholds);
-    var maxCurrent = d3.max(Utils.pluck(data, 'current'));
-    var maxPast = d3.max(Utils.pluck(data, 'baseline'));
+    var maxCurrent = d3.max(bimad.utils.pluck(data, 'current'));
+    var maxPast = d3.max(bimad.utils.pluck(data, 'baseline'));
     var maxDomain = Math.max(maxCurrent, maxPast, maxPast * (opts.thresholds.higher / 100)) * BUFFER;
 
     var sums = 0;
@@ -338,7 +338,7 @@
   };
 
   BulletChart.prototype.render = function () {
-    var renderInner = Utils.proxy(this.renderInnerChart, this);
+    var renderInner = bimad.utils.proxy(this.renderInnerChart, this);
     var opts = this.options;
     var self = this;
 
@@ -512,7 +512,7 @@
       'margin-bottom': '2px'
     });
     wrapper.append('div').attr('class', 'current label').html(
-      Utils.capitalize(this.options.currentLabel)
+      bimad.utils.capitalize(this.options.currentLabel)
     );
     wrapper.append('div').attr({
       'class': 'target legend'
@@ -522,7 +522,7 @@
       'height': this.options.chart.target.height + 'px'
     });
     wrapper.append('div').attr('class', 'target label').html(
-      Utils.capitalize(this.options.targetLabel)
+      bimad.utils.capitalize(this.options.targetLabel)
     );
 
     this.options.legend.height = this.legends.node().clientHeight;
@@ -547,7 +547,7 @@
   };
 
   BulletChart.prototype.renderPopup = function () {
-    if (Utils.isDesigner())
+    if (bimad.utils.isDesigner())
       return this;
     var $container = $(this.container.select('div.chart-wrapper'));
     var popup = $container.find('div.popup');
@@ -565,16 +565,16 @@
       var popupContent = [];
       popupContent.push('<div class="details">');
       popupContent.push('<div class="detail">');
-      popupContent.push('<div class="target label list-item">' + Utils.capitalize(this.options.targetLabel) + '</div>');
+      popupContent.push('<div class="target label list-item">' + bimad.utils.capitalize(this.options.targetLabel) + '</div>');
       popupContent.push('<div class="target value list-item"></div>');
       popupContent.push('</div>');
       popupContent.push('<div class="detail">');
-      popupContent.push('<div class="current label list-item">' + Utils.capitalize(this.options.currentLabel) + '</div>');
+      popupContent.push('<div class="current label list-item">' + bimad.utils.capitalize(this.options.currentLabel) + '</div>');
       popupContent.push('<div class="value list-item current"></div>');
       popupContent.push('</div>');
       popupContent.push('<div class="inline-detail">');
       popupContent.push('<span class="value percentage"></span>');
-      popupContent.push('<span class="label percengage"> of the Target ' + Utils.capitalize(this.options.targetLabel) + '</span>');
+      popupContent.push('<span class="label percengage"> of the Target ' + bimad.utils.capitalize(this.options.targetLabel) + '</span>');
       popupContent.push('</div>');
       popupContent.push('</div>');
 
@@ -617,7 +617,7 @@
   };
 
   BulletChart.prototype.showPopup = function (data, position) {
-    if (Utils.isDesigner())
+    if (bimad.utils.isDesigner())
       return this;
     this.popup.close();
     this.popup.find('.target.value').html(this.options.baseLineFormat(data.baseline));
@@ -628,7 +628,7 @@
   };
 
   BulletChart.prototype.hidePopup = function () {
-    if (Utils.isDesigner())
+    if (bimad.utils.isDesigner())
       return this;
     this.popup.close();
     return this;
@@ -700,7 +700,7 @@
   };
 
   BulletChart.prototype.updateFilterInfo = function (filters) {
-    if (!Utils.isArray(filters))
+    if (!bimad.utils.isArray(filters))
       return this;
 
     var self = this;
